@@ -8,7 +8,7 @@ const WishStore = create((set) => ({
     try {
       set({ IsWishSubmit: true });
       let res = await axios.post(
-        `${import.meta.env.BASE_URL}/api/createWish`,
+        `${import.meta.env.VITE_BASE_URL}/api/createWish`,
         { productID: ProductID }
       );
       return res.data["status"] === "success";
@@ -23,7 +23,7 @@ const WishStore = create((set) => ({
   WishListRequest: async () => {
     try {
       let res = await axios.get(
-        `${import.meta.env.BASE_URL}/api/readWishList`
+        `${import.meta.env.VITE_BASE_URL}/api/readWishList`
       );
       set({ WishList: res.data["data"] });
       set({ WishCount: res.data["data"].length });
@@ -34,7 +34,7 @@ const WishStore = create((set) => ({
   WishListRemoveRequest: async (ProductID) => {
     try {
       set({ WishList: null });
-      await axios.post(`${import.meta.env.BASE_URL}/api/removeWish`, {
+      await axios.post(`${import.meta.env.VITE_BASE_URL}/api/removeWish`, {
         productID: ProductID,
       });
     } catch (error) {

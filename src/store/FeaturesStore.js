@@ -4,7 +4,7 @@ import axios from "axios";
 const FeaturesStore = create((set) => ({
   FeaturesList: null,
   FeaturesListRequest: async () => {
-    let res = await axios.get(`${import.meta.env.BASE_URL}/api/featureList`);
+    let res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/featureList`);
     if (res.data["status"] === "success") {
       set({ FeaturesList: res.data["data"] });
     }
@@ -13,7 +13,7 @@ const FeaturesStore = create((set) => ({
   LegalListRequest: async (type) => {
     set({ LegalList: null });
     let res = await axios.get(
-      `${import.meta.env.BASE_URL}/api/legal-features/${type}`
+      `${import.meta.env.VITE_BASE_URL}/api/legal-features/${type}`
     );
     if (res.data["status"] === "success") {
       set({ LegalList: res.data["data"] });

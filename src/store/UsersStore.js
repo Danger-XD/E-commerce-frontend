@@ -28,7 +28,7 @@ const UserStore = create((set) => ({
   IsFormSubmit: false,
   UserOtpRequest: async (email) => {
     set({ IsFormSubmit: true });
-    let res = await axios.post(`${import.meta.env.BASE_URL}/api/login`, {
+    let res = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/login`, {
       email: email,
     });
     setEmail(email);
@@ -37,17 +37,20 @@ const UserStore = create((set) => ({
   },
   LogoutRequest: async () => {
     set({ IsFormSubmit: true });
-    let res = await axios.post(`${import.meta.env.BASE_URL}/api/logout`);
+    let res = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/logout`);
     set({ IsFormSubmit: false });
     return res.data["status"] === "success";
   },
   VerifyLoginRequest: async (otp) => {
     set({ IsFormSubmit: true });
     let email = getEmail();
-    let res = await axios.post(`${import.meta.env.BASE_URL}/api/verifyLogin`, {
-      email: email,
-      otp: otp,
-    });
+    let res = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/api/verifyLogin`,
+      {
+        email: email,
+        otp: otp,
+      }
+    );
     set({ IsFormSubmit: false });
     return res.data["status"] === "success";
   },
@@ -80,7 +83,7 @@ const UserStore = create((set) => ({
   ProfileDetailsRequest: async () => {
     try {
       let res = await axios.get(
-        `${import.meta.env.BASE_URL}/api/readUserProfile`
+        `${import.meta.env.VITE_BASE_URL}/api/readUserProfile`
       );
       if (res.data["data"].length > 0) {
         set({ ProfileDetails: res.data["data"][0] });
@@ -96,7 +99,7 @@ const UserStore = create((set) => ({
     try {
       set({ ProfileDetails: null });
       let res = await axios.post(
-        `${import.meta.env.BASE_URL}/api/updateUserProfile`,
+        `${import.meta.env.VITE_BASE_URL}/api/updateUserProfile`,
         PostBody
       );
       return res.data["status"] === "success";

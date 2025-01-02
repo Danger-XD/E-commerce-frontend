@@ -23,7 +23,7 @@ const CartStore = create((set) => ({
       PostBody.productID = ProductID;
       PostBody.qty = quantity;
       let res = await axios.post(
-        `${import.meta.env.BASE_URL}/api/createCart`,
+        `${import.meta.env.VITE_BASE_URL}/api/createCart`,
         PostBody
       );
       return res.data["status"] === "success";
@@ -41,7 +41,7 @@ const CartStore = create((set) => ({
   CartListRequest: async () => {
     try {
       let res = await axios.get(
-        `${import.meta.env.BASE_URL}/api/readCartList`
+        `${import.meta.env.VITE_BASE_URL}/api/readCartList`
       );
       set({ CartList: res.data["data"] });
       set({ CartCount: res.data["data"].length });
@@ -72,7 +72,7 @@ const CartStore = create((set) => ({
   CartListRemoveRequest: async (id) => {
     try {
       set({ CartList: null });
-      await axios.post(`${import.meta.env.BASE_URL}/api/removeCart`, {
+      await axios.post(`${import.meta.env.VITE_BASE_URL}/api/removeCart`, {
         id: id,
       });
     } catch (error) {
@@ -83,7 +83,7 @@ const CartStore = create((set) => ({
     try {
       set({ IsCartSubmit: true });
       let res = await axios.get(
-        `${import.meta.env.BASE_URL}/api/createInvoice`
+        `${import.meta.env.VITE_BASE_URL}/api/createInvoice`
       );
       window.location.href = res.data["data"]["GatewayPageURL"];
     } catch (error) {
@@ -96,7 +96,7 @@ const CartStore = create((set) => ({
   InvoiceListRequest: async () => {
     try {
       let res = await axios.get(
-        `${import.meta.env.BASE_URL}/api/InvoiceList`
+        `${import.meta.env.VITE_BASE_URL}/api/InvoiceList`
       );
       set({ InvoiceList: res.data["data"] });
     } catch (e) {
@@ -107,7 +107,7 @@ const CartStore = create((set) => ({
   InvoiceDetailsListRequest: async (id) => {
     try {
       let res = await axios.get(
-        `${import.meta.env.BASE_URL}/api/invoiceDetails/${id}`
+        `${import.meta.env.VITE_BASE_URL}/api/invoiceDetails/${id}`
       );
       set({ InvoiceDetailsList: res.data["data"] });
     } catch (e) {

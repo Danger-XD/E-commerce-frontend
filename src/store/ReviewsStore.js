@@ -21,7 +21,7 @@ const ReviewStore = create((set) => ({
     try {
       set({ IsReviewSubmit: true });
       let res = await axios.post(
-        `${import.meta.env.BASE_URL}/api/createProductReview`,
+        `${import.meta.env.VITE_BASE_URL}/api/createProductReview`,
         PostBody
       );
       return res.data["status"] === "success";
